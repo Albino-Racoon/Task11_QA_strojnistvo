@@ -1,0 +1,41 @@
+{
+  "detector_available": true,
+  "anomaly_available": true,
+  "latency": {
+    "n": 40,
+    "p50_ms": 29.3,
+    "p95_ms": 33.2,
+    "mean_ms": 30.0
+  },
+  "anomaly_binary": {
+    "threshold": 0.65,
+    "n_ok": 80,
+    "n_nok": 52,
+    "mean_score_ok": 0.6395,
+    "mean_score_nok": 0.6796,
+    "defect_recall": 0.6538,
+    "false_reject_rate": 0.45,
+    "false_accept_rate": 0.3462,
+    "auroc": 0.6844,
+    "tp": 34,
+    "tn": 44,
+    "fp": 36,
+    "fn": 18
+  },
+  "yolo_map": {
+    "mAP50": 0.2165,
+    "mAP50_95": 0.1014
+  },
+  "decision_smoke": {
+    "status": "FAIL",
+    "decision": "MANUAL_REVIEW",
+    "quality_score": 76,
+    "reason": "Neznana anomalija (UNKNOWN DEFECT)",
+    "defects": [],
+    "anomaly": {
+      "score": 0.6726,
+      "heatmap_url": null,
+      "is_anomaly": true
+    }
+  }
+}

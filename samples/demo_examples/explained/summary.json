@@ -1,0 +1,88 @@
+[
+  {
+    "file": "pass_0_20033.png",
+    "kind": "pass_anomaly_ok",
+    "status": "PASS",
+    "reason": "PASS: ni znane napake, anomaly 0.33 < prag REVIEW 0.49",
+    "quality": 88,
+    "anomaly": 0.33,
+    "defects": [],
+    "image": "samples/demo_examples/explained/pass_0_20033.png",
+    "heatmap": "samples/demo_examples/explained/pass_0_20033_heat.jpg",
+    "annotated": "samples/demo_examples/explained/pass_0_20033_ann.jpg"
+  },
+  {
+    "file": "pass_1_20094.png",
+    "kind": "pass_anomaly_ok",
+    "status": "PASS",
+    "reason": "PASS: ni znane napake, anomaly 0.34 < prag REVIEW 0.49",
+    "quality": 88,
+    "anomaly": 0.342,
+    "defects": [],
+    "image": "samples/demo_examples/explained/pass_1_20094.png",
+    "heatmap": "samples/demo_examples/explained/pass_1_20094_heat.jpg",
+    "annotated": "samples/demo_examples/explained/pass_1_20094_ann.jpg"
+  },
+  {
+    "file": "fail_0_20561.png",
+    "kind": "fail_unknown_anomaly",
+    "status": "FAIL",
+    "reason": "FAIL: neznana anomalija (score 0.91 ≥ prag FAIL 0.54)",
+    "quality": 68,
+    "anomaly": 0.911,
+    "defects": [],
+    "image": "samples/demo_examples/explained/fail_0_20561.png",
+    "heatmap": "samples/demo_examples/explained/fail_0_20561_heat.jpg",
+    "annotated": "samples/demo_examples/explained/fail_0_20561_ann.jpg"
+  },
+  {
+    "file": "fail_1_20117.png",
+    "kind": "fail_unknown_anomaly",
+    "status": "FAIL",
+    "reason": "FAIL: neznana anomalija (score 0.90 ≥ prag FAIL 0.54)",
+    "quality": 68,
+    "anomaly": 0.905,
+    "defects": [],
+    "image": "samples/demo_examples/explained/fail_1_20117.png",
+    "heatmap": "samples/demo_examples/explained/fail_1_20117_heat.jpg",
+    "annotated": "samples/demo_examples/explained/fail_1_20117_ann.jpg"
+  },
+  {
+    "file": "punching_hole_gc10_00307.jpg",
+    "kind": "fail_known_defect",
+    "status": "FAIL",
+    "reason": "FAIL: znana napaka »punching_hole« (zaupanje 51%, prag YOLO ≥ 35%)",
+    "quality": 54,
+    "anomaly": 0.915,
+    "defects": [
+      {
+        "type": "punching_hole",
+        "confidence": 0.506
+      }
+    ],
+    "image": "samples/demo_examples/explained/punching_hole_gc10_00307.jpg",
+    "heatmap": "samples/demo_examples/explained/punching_hole_gc10_00307_heat.jpg",
+    "annotated": "samples/demo_examples/explained/punching_hole_gc10_00307_ann.jpg"
+  },
+  {
+    "file": "silk_spot_gc10_00461.jpg",
+    "kind": "fail_known_defect",
+    "status": "FAIL",
+    "reason": "FAIL: znana napaka »silk_spot« (zaupanje 99%, prag YOLO ≥ 35%)",
+    "quality": 0,
+    "anomaly": 0.646,
+    "defects": [
+      {
+        "type": "silk_spot",
+        "confidence": 0.992
+      },
+      {
+        "type": "silk_spot",
+        "confidence": 0.973
+      }
+    ],
+    "image": "samples/demo_examples/explained/silk_spot_gc10_00461.jpg",
+    "heatmap": "samples/demo_examples/explained/silk_spot_gc10_00461_heat.jpg",
+    "annotated": "samples/demo_examples/explained/silk_spot_gc10_00461_ann.jpg"
+  }
+]

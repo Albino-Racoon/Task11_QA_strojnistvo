@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: qc
+      POSTGRES_PASSWORD: qc
+      POSTGRES_DB: quality_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qc -d quality_ai"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    environment:
+      DATABASE_URL: postgresql+psycopg2://qc:qc@db:5432/quality_ai
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000,http://localhost
+      ALLOW_DEMO_FALLBACK: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/app/storage
+      - ./weights:/app/weights
+      - ./training:/app/training
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

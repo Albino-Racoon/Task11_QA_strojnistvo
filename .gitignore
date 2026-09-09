@@ -13,6 +13,11 @@ storage/*.db
 !storage/heatmaps/.gitkeep
 weights/*
 !weights/.gitkeep
+!weights/yolo_gc10.pt
+!weights/patchcore_kolektor/
+!weights/patchcore_kolektor/**
+!weights/patchcore_kolektor2/
+!weights/patchcore_kolektor2/**
 training/datasets/gc10/
 training/datasets/kolektor/
 training/datasets/kolektor2/
@@ -24,6 +29,9 @@ frontend/node_modules/
 frontend/dist/
 .DS_Store
 *.pt
+!weights/yolo_gc10.pt
 *.npy
+!weights/patchcore_kolektor/memory_bank.npy
+!weights/patchcore_kolektor2/memory_bank.npy
 .pytest_cache/
 .mypy_cache/

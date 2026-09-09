@@ -1,0 +1,11 @@
+{
+  "threshold": 0.31865307553796396,
+  "image_size": 224,
+  "memory_bank_size": 4000,
+  "num_train_images": 300,
+  "normal_score_mean": 0.2849451513702263,
+  "normal_score_p90": 0.31865307553796396,
+  "score_aggregation": "mean_top_1pct",
+  "backbone": "resnet18_layer2_layer3",
+  "method": "patchcore_inspired"
+}

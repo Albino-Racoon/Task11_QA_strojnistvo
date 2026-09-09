@@ -1,9 +1,12 @@
-.PHONY: install train eval api frontend test seed docker
+.PHONY: install train eval api frontend test seed docker demo
 
 install:
 	python3 -m venv .venv
 	. .venv/bin/activate && pip install -r requirements.txt
 	cd frontend && npm install
+
+demo:
+	bash scripts/quick_start.sh
 
 train:
 	. .venv/bin/activate && PYTHONPATH=. bash scripts/setup_demo.sh
@@ -25,3 +28,6 @@ test:
 
 docker:
 	docker compose up --build
+
+feed:
+	. .venv/bin/activate && PYTHONPATH=. python scripts/feed_dataset.py samples/demo_examples --limit 20 --line DemoEx

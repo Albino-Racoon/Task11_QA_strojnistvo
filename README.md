@@ -2,48 +2,58 @@
 
 PoC za **vizualni QC** kovinskih/jeklenih delov: upload/kamera → PASS / FAIL / REVIEW → slovenski dashboard.
 
-## Ali lahko hitro poženeš in vidiš rezultate?
+## Za šefa: zagon z Codexom (priporočeno)
 
-**Da** — v repozitoriju so vzorčne slike + predtrenirane PoC uteži (~11 MB).
+1. Prenesi / odpri repo v Cursorju (ali Codex CLI).
+2. Odpri chat z agentom in prilepi **točno to**:
+
+```text
+Poženi ta PoC po navodilih v AGENTS.md.
+Ne treniraš modelov. Ko je pripravljeno, odpri http://127.0.0.1:5173/zgodovina
+(filter linije DemoEx) in povej mi, da lahko gledam rezultate.
+```
+
+3. Počakaj na prvi `pip install` (5–15 min zaradi PyTorch).
+4. Ko agent reče, da je OK → odpri povezavo zgoraj.
+
+Agent bere `AGENTS.md` (koraki, preverjanje, troubleshooting).
+
+## Ročni zagon (brez AI)
 
 ```bash
 git clone https://github.com/Albino-Racoon/Task11_QA_strojnistvo.git
 cd Task11_QA_strojnistvo
 
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt          # prvič: 5–15 min (PyTorch)
+pip install -r requirements.txt
 
-# Terminal 1 — API
+# Terminal 1
 PYTHONPATH=. uvicorn api.main:app --reload --port 8000
 
-# Terminal 2 — napolni galerijo z vzorci
+# Terminal 2
 PYTHONPATH=. python scripts/feed_dataset.py samples/demo_examples --limit 20 --line DemoEx
 
-# Terminal 3 — UI
+# Terminal 3
 cd frontend && npm install && npm run dev
 ```
 
 Odpri **http://127.0.0.1:5173/zgodovina** → linija **DemoEx**.
 
-Ali v enem koraku (API + feed; frontend še vedno ločeno):
-
-```bash
-bash scripts/quick_start.sh
-# nato: cd frontend && npm run dev
-```
+Ali: `bash scripts/quick_start.sh` nato `cd frontend && npm run dev`.
 
 | Kaj dobiš | Opomba |
 |-----------|--------|
-| Dashboard + galerija slik | takoj po `feed_dataset` |
-| Pravi modeli | če so datoteke v `weights/` (so v gitu) |
-| Brez uteži | še vedno teče UI z demo heuristiko |
+| Dashboard + galerija slik | po `feed_dataset` |
+| Pravi modeli | datoteke v `weights/` (so v gitu) |
+| Brez uteži | UI še vedno teče (demo način) |
 
-**Zahteve:** Python 3.10+, Node 18+, ~3 GB prostora za venv (torch).
+**Zahteve:** Python 3.10+, Node 18+, ~3 GB za venv.
 
 ## Struktura
 
 ```text
-api/  inference/  decision_engine/  frontend/  samples/  weights/  training/
+AGENTS.md   ← navodila za AI agent (Codex/Cursor)
+api/  frontend/  weights/  samples/  decision_engine/  training/
 ```
 
 ## API (kratko)
@@ -53,17 +63,13 @@ api/  inference/  decision_engine/  frontend/  samples/  weights/  training/
 - `GET /api/stats/today` — statistika
 - `GET /api/health` — status modelov
 
-## Ponovni trening (opcijsko)
-
-Uteži so že vključene. Če jih hočeš zgraditi znova:
+## Ponovni trening (opcijsko, dolgo)
 
 ```bash
 bash scripts/setup_demo.sh
 ```
 
-Javni seti: GC10-DET, KolektorSDD / KolektorSDD2. MVTec AD je CC BY-NC-SA (ne za komercialno uporabo).
-
-MSDD (ulitki, ~9 GB, ScienceDB): glej navodila v `training/` po ročnem prenosu.
+Samo če hočeš zgraditi uteži znova. Za demo **ni treba**.
 
 ## Preklop na podatke podjetja
 
@@ -77,10 +83,9 @@ MSDD (ulitki, ~9 GB, ScienceDB): glej navodila v `training/` po ročnem prenosu.
 docker compose up --build
 ```
 
-UI: http://localhost:5173 · API: http://localhost:8000/docs  
-(uteži se mountajo iz `./weights`)
+UI: http://localhost:5173 · API: http://localhost:8000/docs
 
 ## Opombe
 
 - Produkcija potrebuje stabilno optiko/osvetlitev in PLC I/O — to ni del tega PoC.
-- Eval metrike: `python training/evaluate.py`
+- Eval: `python training/evaluate.py`
